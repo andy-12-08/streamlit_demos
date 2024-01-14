@@ -5,6 +5,11 @@ import matplotlib
 matplotlib.use('Agg')
 import seaborn as sns
 import plotly.express as px
+import os
+
+# Suppress specific warnings
+import warnings
+warnings.filterwarnings('ignore', category=UserWarning, message=".*Could not convert dtype.*")
 
 # ML libraries 
 from sklearn.preprocessing import LabelEncoder
@@ -14,17 +19,31 @@ def load_data(data):
     df = pd.read_csv(data)
     return df
 
+# def encode_data(df):
+#     for col in df.columns:
+#         if col != 'Age':
+#             df[col] = df[col].map({'Yes': 1, 'No': 0,'Male':1,'Female':0,'Positive':1,'Negative':0})
+#     return df
+
 def encode_data(df):
+    mappings = {'Yes': 1, 'No': 0, 'Male': 1, 'Female': 0, 'Positive': 1, 'Negative': 0}
     for col in df.columns:
         if col != 'Age':
-            df[col] = df[col].map({'Yes': 1, 'No': 0,'Male':1,'Female':0,'Positive':1,'Negative':0})
+            # Replace values based on mapping and convert to numeric
+            df[col] = pd.to_numeric(df[col].map(mappings))
     return df
+
 
 def run_eda_app():
 
     st.subheader("From Exploratory Data Analysis")
 
-    df = load_data('data/diabetes_data_upload.csv')  # load it at the top because other sections might make use it 
+    # df = load_data('data/diabetes_data_upload.csv')  # load it at the top because other sections might make use it 
+
+    # Alternatively, dynamically generate and use the absolute path to your file using Python's os module
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    file_path = os.path.join(dir_path, 'data', 'diabetes_data_upload.csv')
+    df = load_data(file_path)
 
     submenu = ['Descriptive','Plots']
     choice = st.sidebar.selectbox('Submenu',submenu)
@@ -59,7 +78,7 @@ def run_eda_app():
                 ## method_2 (using seaborn - bar chart)
                 fig2 = plt.figure()
                 #sns.countplot(df['Gender'])
-                sns.countplot(x='Gender', data=df, palette='Set1')
+                sns.countplot(x='Gender', data=df, palette='Set1', hue='Gender')
                 sns.set(style='darkgrid')
                 st.pyplot(fig2)
 
@@ -72,7 +91,7 @@ def run_eda_app():
                 ## method_2 (using seaborn - bar chart)
                 fig2 = plt.figure()
                 #sns.countplot(df['Gender'])
-                sns.countplot(x='class', data=df, palette='Set1')
+                sns.countplot(x='Gender', data=df, palette='Set1', hue='Gender')
                 sns.set(style='darkgrid')
                 st.pyplot(fig2)
 

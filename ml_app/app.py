@@ -3,6 +3,7 @@ import streamlit as st
 from eda_app import run_eda_app
 from ml_app import run_ml_app
 
+
 def main():
 
     st.set_page_config(page_title='machine learning application',

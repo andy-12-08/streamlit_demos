@@ -4,6 +4,13 @@ import os
 import numpy as np
 import pandas as pd
 from eda_app import encode_data
+import os
+
+import warnings
+
+# Suppress specific UserWarnings from scikit-learn
+warnings.filterwarnings(action='ignore', category=UserWarning, module='sklearn.*')
+
 
 attribute_info = """
 - Age: 20-65		
@@ -94,7 +101,13 @@ def run_ml_app():
     with st.expander('Prediction'):
         # single sample with multiple features
         single_sample = np.array([results_df_encoded.iloc[0]])
-        model = load_model('models/logistic_regression_model_diabetes_1_13_2024.pkl')
+        # single_sample = results_df_encoded
+
+         #model = load_model('models/logistic_regression_model_diabetes_1_13_2024_new.pkl')
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        file_path = os.path.join(dir_path, 'models', 'logistic_regression_model_diabetes_1_13_2024_new.pkl')
+        model = load_model(file_path)
+
         prediction = model.predict(single_sample)
         pred_prob = model.predict_proba(single_sample)
         # st.write(prediction)
