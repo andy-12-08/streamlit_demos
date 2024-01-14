@@ -24,7 +24,7 @@ def run_eda_app():
 
     st.subheader("From Exploratory Data Analysis")
 
-    df = load_data('./data/diabetes_data_upload.csv')  # load it at the top because other sections might use it
+    df = load_data('/data/diabetes_data_upload.csv')  # load it at the top because other sections might use it
 
     submenu = ['Descriptive','Plots']
     choice = st.sidebar.selectbox('Submenu',submenu)
