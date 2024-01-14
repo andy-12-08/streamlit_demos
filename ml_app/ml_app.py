@@ -27,10 +27,18 @@ attribute_info = """
 
 
 #Load ML Models
+# @st.cache_data
+# def load_model(model_file):
+#     loaded_model = joblib.load(open(os.path.join(model_file),'rb'))
+#     return loaded_model
+
 @st.cache_data
 def load_model(model_file):
-    loaded_model = joblib.load(open(os.path.join(model_file),'rb'))
+    with open(model_file, 'rb') as file:
+        loaded_model = joblib.load(file)
     return loaded_model
+
+
 
 def run_ml_app():
 
