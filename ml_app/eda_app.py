@@ -7,9 +7,6 @@ import seaborn as sns
 import plotly.express as px
 import os
 
-# Suppress specific warnings
-import warnings
-warnings.filterwarnings('ignore', category=UserWarning, message=".*Could not convert dtype.*")
 
 # ML libraries 
 from sklearn.preprocessing import LabelEncoder
