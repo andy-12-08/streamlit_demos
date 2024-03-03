@@ -2,6 +2,17 @@ import streamlit as st
 import pandas as pd
 import streamlit.components as stc
 
+import pyautogui
+from PIL import Image
+
+def take_screenshoot_and_save():
+    # Take screenshot
+    # x,y,width, height
+    screenshot = pyautogui.screenshot(region=(100,100,800,600))
+    filename = "streamlit_page.png"
+    screenshot.save(filename)
+
+
 ### Fxn Approach
 # Utils 
 import base64
@@ -94,6 +105,13 @@ def main():
             
     else:
         st.subheader("About")
+
+
+    k=5
+    if k<10:
+        take_screenshoot_and_save()
+        st.success("Screenshot taken successfully")
+
     
 if __name__ == '__main__':
     main()

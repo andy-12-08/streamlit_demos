@@ -7,7 +7,6 @@ import seaborn as sns
 import plotly.express as px
 import os
 
-
 # ML libraries 
 from sklearn.preprocessing import LabelEncoder
 
@@ -119,6 +118,7 @@ def run_eda_app():
         with st.expander("Outlier Visualization"):
             fig= px.box(df, x='Age', color='Gender')
             st.plotly_chart(fig, use_container_width=True)
+    
 
 if __name__ == "__main__":
     run_eda_app()
