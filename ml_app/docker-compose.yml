@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  my_app:
+    build: . # This tells Docker Compose to build an image from the Dockerfile in the current directory
+    ports:
+      - "8501:8501" # Maps port 8501 on the container to port 8501 on the host
+    volumes:
+      - .:/app # Mounts the current directory to /app in the container
+    command: streamlit run app.py # Overrides the CMD in the Dockerfile, if necessary
