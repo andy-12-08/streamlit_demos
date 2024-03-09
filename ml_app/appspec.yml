@@ -2,4 +2,13 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination:  /home/ec2-user/ml-app
+    destination:  /home/ec2-user/ml-app  # The location on the Amazon EC2 instance where the source files are copied.
+hooks: # Hooks allow you to specify scripts to run at set points in the deployment lifecycle.
+  BeforeInstall: # Run before the new version is installed.
+    - location: scripts/before_install.sh # The location of the script relative to the root of your application.
+      timeout: 300
+      runas: root
+  AfterInstall: # Run after the new version is installed but before the application is started.
+    - location: scripts/after_install.sh # The location of the script relative to the root of your application.
+      timeout: 300
+      runas: root

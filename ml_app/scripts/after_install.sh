@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/ubuntu/ml_app
+cd /home/ubuntu/ml_app   # change to the directory where the docker-compose.yml file is located
 
 docker-compose stop;   # stop the running containers
 docker-compose rm -f;  # remove the containers
